@@ -19,13 +19,9 @@ pool.getConnection((err, connection) => {
     if (err.code === 'ER_TRUNCATED_WRONG_VALUE'){
       console.log('VALOR INCORRECTO!');
     }
-
   }
-
   if (connection) connection.release();
-  console.log('DB is Connected');
-
-  
+  console.log('DB is Connected');  
 });
 
 // Promisify Pool Querys

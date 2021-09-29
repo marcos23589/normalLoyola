@@ -4,8 +4,10 @@ const pool=require('../database');
 
 module.exports = () => {
 
-    router.get('/',  (req, res) => {
-        res.send('index');
+    router.get('/',  async (req, res) => {
+        const alumno = await pool.query('SELECT * FROM alumnos');
+        console.log(alumno);
+        res.render('links/list', {alumno});
     });
 
 
@@ -18,25 +20,20 @@ module.exports = () => {
     });
     
     router.post('/add', (req,res)=>{
+        pool.query('INSERT INTO alumnos set ?', req.body);
         console.log(req.body);
-       /*  const{ apellido, nombre, documento, nacimiento }=req.body;
-        const nuevoAlumno = {
-            apellido,
-            nombre,
-            documento,
-            nacimiento
-        };*/    
-        try{
-            pool.query('INSERT INTO alumnos set ?', req.body);
-            res.send('controlador!');   
+        res.redirect('/');
+        /* try{
+            
         }catch(err){
-            res.send(`Error encontrado! => ${err}`);
-/*             setTimeout(()=>{
-                res.render('/links/add');
-            }, 2000); */
-        }
-
-        
+            if(err.code ===  'ER_DUP_ENTRY'){
+                res.send('valor duplicado!');
+            } else
+            if (err.code === 'ER_TRUNCATED_WRONG_VALUE'){
+                res.send('error en un dato!');
+            }
+        } */
+           
     });
     
     return router;
