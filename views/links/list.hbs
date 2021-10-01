@@ -1,4 +1,4 @@
-<div class="container p-4">
+{{!-- <div class="container p-4">
     <div class="row">
         {{#each alumno}}
         <div class="col-md-3">
@@ -29,9 +29,51 @@
         <div class="col-md-4 mx-auto">
             <div class="card card-body text-center bg-dark text-light">
                 <p>There are not Links saved yet.</p>
-                <a href="/links/add" class="text-success">Create One!</a>
+                <a href="/add" class="text-success">Create One!</a>
             </div>
         </div>
         {{/each}}
     </div>
+</div> --}}
+
+<div class="container p-4">
+    <table class="table table-hover table-sm">
+        <caption>Lista de alumnos</caption>
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Fecha de nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each alumno}}
+            <tr>
+                <th scope="row">{{idAlumnos}}</th>
+                <td>{{apellido}}</td>
+                <td>{{nombre}}</td>
+                <td>{{documento}}</td>
+                <td>{{timeago nacimiento}}</td>
+                {{!-- <td><a href="#" class="btn btn-secondary">Editar</a></td>
+                <td><a href="#" class="btn btn-danger">Eliminar</a></td> --}}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="#" class="btn btn-primary">Ver</a>
+                    <a href="#" class="btn btn-secondary">Editar</a>
+                    <a href="/delete/{{idAlumnos}}" class="btn btn-danger">Eliminar</a>
+                </div>
+                </td>
+            </tr>
+            {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <h4>No hay alumnos inscriptos.</h4>                   
+                </div>
+            </div>
+            {{/each}}
+        </tbody>
+    </table>
+    <a role="button" class="btn btn-primary btn-lg" href="/add">Agregar alumno</a>
 </div>

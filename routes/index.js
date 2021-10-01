@@ -5,7 +5,7 @@ const pool=require('../database');
 module.exports = () => {
 
     router.get('/',  async (req, res) => {
-        const alumno = await pool.query('SELECT * FROM alumnos');
+        const alumno = await pool.query('SELECT * FROM alumnos');        
         console.log(alumno);
         res.render('links/list', {alumno});
     });
@@ -22,18 +22,13 @@ module.exports = () => {
     router.post('/add', (req,res)=>{
         pool.query('INSERT INTO alumnos set ?', req.body);
         console.log(req.body);
+        res.redirect('/');           
+    });
+
+    router.get('/delete/:idAlumnos', async (req,res)=>{
+        console.log(req.params.idAlumnos);
+        await pool.query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
         res.redirect('/');
-        /* try{
-            
-        }catch(err){
-            if(err.code ===  'ER_DUP_ENTRY'){
-                res.send('valor duplicado!');
-            } else
-            if (err.code === 'ER_TRUNCATED_WRONG_VALUE'){
-                res.send('error en un dato!');
-            }
-        } */
-           
     });
     
     return router;
