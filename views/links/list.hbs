@@ -1,41 +1,3 @@
-{{!-- <div class="container p-4">
-    <div class="row">
-        {{#each alumno}}
-        <div class="col-md-3">
-            <div class="card text-center bg-dark text-light">
-                <div class="card-body">
-                    <a href="{{apellido}}" target="_blank" class="text-light">
-                        <h4 class="card-title text-uppercase">
-                            {{nombre}}
-                        </h4>
-                        <h4 class="card-title text-uppercase">
-                            {{apellido}}
-                        </h4>
-                    </a>
-                    <p class="m-2">{{documento}}</p>
-                    <p class="text-muted">
-                        {{nacimiento}}
-                    </p>
-                    <a class="btn btn-danger" href="/links/delete/{{id}}">
-                        Delete Link
-                    </a>
-                    <a class="btn btn-secondary" href="/links/edit/{{id}}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="col-md-4 mx-auto">
-            <div class="card card-body text-center bg-dark text-light">
-                <p>There are not Links saved yet.</p>
-                <a href="/add" class="text-success">Create One!</a>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-</div> --}}
-
 <div class="container p-4">
     <table class="table table-hover table-sm">
         <caption>Lista de alumnos</caption>
@@ -56,12 +18,10 @@
                 <td>{{nombre}}</td>
                 <td>{{documento}}</td>
                 <td>{{timeago nacimiento}}</td>
-                {{!-- <td><a href="#" class="btn btn-secondary">Editar</a></td>
-                <td><a href="#" class="btn btn-danger">Eliminar</a></td> --}}
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="#" class="btn btn-primary">Ver</a>
-                    <a href="#" class="btn btn-secondary">Editar</a>
+                    <a href="/view/{{idAlumnos}}" class="btn btn-primary">Ver</a>
+                    <a href="/edit/{{idAlumnos}}" class="btn btn-secondary">Editar</a>
                     <a href="/delete/{{idAlumnos}}" class="btn btn-danger">Eliminar</a>
                 </div>
                 </td>

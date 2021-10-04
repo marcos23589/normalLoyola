@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `alumnos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alumnos` (
   `idAlumnos` int NOT NULL AUTO_INCREMENT,
-  `Apellido` varchar(45) NOT NULL,
-  `Nombre` varchar(45) NOT NULL,
-  `Documento` int NOT NULL,
-  `FNacimiento` date DEFAULT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `documento` int NOT NULL,
+  `nacimiento` DATE NULL, 
   PRIMARY KEY (`idAlumnos`),
   UNIQUE KEY `idAlumnos_UNIQUE` (`idAlumnos`),
   UNIQUE KEY `Documento_UNIQUE` (`Documento`)

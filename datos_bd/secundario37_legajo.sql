@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `legajo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `legajo` (
   `idLegajo` int NOT NULL AUTO_INCREMENT,
-  `Libro` varchar(2) DEFAULT NULL,
-  `Folio` varchar(2) DEFAULT NULL,
-  `Legajo` int DEFAULT NULL,
-  `Año` int DEFAULT NULL,
+  `libro` varchar(2) DEFAULT NULL,
+  `folio` varchar(2) DEFAULT NULL,
+  `legajo` int DEFAULT NULL,
+  `ano` int DEFAULT NULL,
   `legajoAlumno` int DEFAULT NULL,
   PRIMARY KEY (`idLegajo`),
   UNIQUE KEY `idLegajo_UNIQUE` (`idLegajo`),
