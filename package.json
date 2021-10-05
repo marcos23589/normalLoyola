@@ -12,10 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "alert": "^5.0.10",
+    "connect-flash": "^0.1.1",
+    "connect-flash-plus": "^0.2.1",
+    "cookieparser": "^0.1.0",
     "date-fns": "^2.24.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "timeago.js": "^4.0.2"

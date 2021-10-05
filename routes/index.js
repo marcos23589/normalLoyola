@@ -3,6 +3,8 @@ const router = express.Router();
 const pool=require('../database');
 const alert=require('alert');
 
+
+
 module.exports = () => {
 
     router.get('/',  async (req, res) => {
@@ -23,7 +25,8 @@ module.exports = () => {
     router.post('/add', async(req,res)=>{
         try {
             await pool.query('INSERT INTO alumnos set ?', req.body);
-            console.log(req.body);
+            //alert('Alumno insertado correctamente!')  
+            req.flash('alerta', 'Alumno guardado exitosamente');            
             res.redirect('/');               
         } catch (error) {
             if(error.code === 'ER_DUP_ENTRY'){                
@@ -37,6 +40,7 @@ module.exports = () => {
     router.get('/delete/:idAlumnos', async (req,res)=>{
         console.log(req.params.idAlumnos);
         await pool.query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
+        req.flash('alerta', 'Alumno eliminado exitosamente');
         res.redirect('/');
     });
 
