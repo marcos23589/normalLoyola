@@ -10,7 +10,9 @@ module.exports = () => {
     router.get('/',  async (req, res) => {
         const alumno = await pool.query('SELECT * FROM alumnos');        
         console.log(alumno);
-        res.render('links/list', {alumno});
+        // Flavio: agregado la recuperación del/los mensajes de la key alerta
+        mensaje = await req.consumeFlash('alerta')
+        res.render('links/list', {alumno, mensaje });
     });
 
 
@@ -26,7 +28,8 @@ module.exports = () => {
         try {
             await pool.query('INSERT INTO alumnos set ?', req.body);
             //alert('Alumno insertado correctamente!')  
-            req.flash('alerta', 'Alumno guardado exitosamente');            
+            // Flavio: Agregado await antes de la asignación del par:valor
+            await req.flash('alerta', 'Alumno guardado exitosamente');            
             res.redirect('/');               
         } catch (error) {
             if(error.code === 'ER_DUP_ENTRY'){                
@@ -40,7 +43,8 @@ module.exports = () => {
     router.get('/delete/:idAlumnos', async (req,res)=>{
         console.log(req.params.idAlumnos);
         await pool.query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
-        req.flash('alerta', 'Alumno eliminado exitosamente');
+        // Flavio: Agregado await antes de la asignación del par:valor
+        await req.flash('alerta', 'Alumno eliminado exitosamente');
         res.redirect('/');
     });
 

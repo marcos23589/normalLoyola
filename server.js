@@ -3,7 +3,9 @@ const router = require('./routes');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
-const flash = require('connect-flash-plus');
+// Agregada por Flavio
+const { flash } = require('express-flash-message');
+//const flash = require('connect-flash-plus');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
@@ -35,8 +37,10 @@ app.use(session({
   store: new MySQLStore(database)
 }))
 
+// Modificada por Flavio
+app.use(flash({ sessionKeyName: 'flashMessage' }))
 
-app.use(flash());
+// app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
