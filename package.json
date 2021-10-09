@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "alert": "^5.0.10",
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-flash-plus": "^0.2.1",
     "cookieparser": "^0.1.0",
@@ -24,6 +25,8 @@
     "express-session": "^1.17.2",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {

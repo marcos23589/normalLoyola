@@ -9,10 +9,12 @@ const { flash } = require('express-flash-message');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
+const passport = require('passport');
 
-
+//INICIALIZACIONES
 const port = '3000';
 const app=express();
+require('./lib/passport');
 
 //SETTINGS  
 app.set("views", path.join(__dirname, "views"));
@@ -36,20 +38,21 @@ app.use(session({
   saveUninitialized: false,
   store: new MySQLStore(database)
 }))
-
 // Modificada por Flavio
 app.use(flash({ sessionKeyName: 'flashMessage' }))
-
-// app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use('/', router());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
   app.locals.alerta = req.flash('alerta')
+  app.locals.mensaje = req.flash('mensaje')
   next();
 })
 
