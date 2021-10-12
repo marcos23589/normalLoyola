@@ -14,10 +14,21 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/signin">SignIn</a>
+        </li>         
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Usuarios</a>
         </li>
+        {{#if user}}
+          <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/logout">LogOut</a>
+          </li>
+        {{/if}}
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
-        </li>
+       </li>
       </ul>
     </div>
   </div>

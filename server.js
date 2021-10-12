@@ -4,8 +4,8 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
 // Agregada por Flavio
-const { flash } = require('express-flash-message');
-//const flash = require('connect-flash-plus');
+//const { flash } = require('express-flash-message');
+const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
@@ -39,23 +39,31 @@ app.use(session({
   store: new MySQLStore(database)
 }))
 // Modificada por Flavio
-app.use(flash({ sessionKeyName: 'flashMessage' }))
+//app.use(flash({ sessionKeyName: 'flashMessage' }))
+//app.use(flash({ sessionKeyName: 'flashMessage', useCookieSession: true }));
+app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use('/', router());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//PUBLIC
+app.use(express.static(path.join(__dirname, 'public')));
 
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
-  app.locals.alerta = req.flash('alerta')
-  app.locals.mensaje = req.flash('mensaje')
+  res.locals.alert = req.flash('alerta')
+  res.locals.messages = req.flash('mensaje')
+  res.locals.user = req.user;
   next();
 })
 
+//RUTAS
+app.use(require('./routes/autenticacion'));
+
+//SERVIDOR
 app.listen(port,()=>{
     console.log('escuchando en el puerto',port);
 })
