@@ -33,7 +33,6 @@ app.set("view engine", ".hbs");
 //MIDDLEWARES
 app.use(session({
   secret: 'keyboard cat',
-  cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)
@@ -54,7 +53,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
-  res.locals.alert = req.flash('alerta')
   res.locals.messages = req.flash('mensaje')
   res.locals.user = req.user;
   next();
