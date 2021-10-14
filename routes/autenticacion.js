@@ -2,30 +2,30 @@ const express = require('express');
 const router = express.Router();
 const pool=require('../database');
 const passport = require('passport');
-const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
 //---AUTENTICACION DE USUARIOS---//
 
     //  registro de usuario
-    router.get('/signup', (req,res)=>{  
-        res.render('auth/signup', {messages: req.flash('mensaje')});
+    router.get('/register', isNotLoggedIn, (req,res)=>{  
+        res.render('auth/register', {messages: req.flash('mensaje')});
     });
 
-    router.post('/signup', passport.authenticate('local.signup', {
-        successRedirect: '/profile',
-        failureRedirect: '/signup',
+    router.post('/register', isNotLoggedIn, passport.authenticate('local.register', {
+        successRedirect: '/links',
+        failureRedirect: '/register',
         failureFlash: true
     }));
 
     //  logueo
-    router.get('/signin',(req,res)=>{  
-        return res.render('auth/signin', {messages: req.flash('mensaje')});
+    router.get('/login',isNotLoggedIn,(req,res)=>{  
+        return res.render('auth/login', {messages: req.flash('mensaje')});
     });
 
-    router.post('/signin', (req,res,next)=>{
-        passport.authenticate('local.signin', {           
+    router.post('/login', isNotLoggedIn, (req,res,next)=>{
+        passport.authenticate('local.login', {           
             successRedirect: '/profile',
-            failureRedirect: '/signin',
+            failureRedirect: '/login',
             failureFlash: true
         }) (req, res, next);
         
@@ -39,11 +39,11 @@ const { isLoggedIn } = require('../lib/auth');
     router.get('/logout', (req,res)=>{
         req.logOut();
         req.flash('mensaje', 'Sesión finalizada')
-        res.redirect('/signin')        
+        res.redirect('/login')        
     })
 
     router.get('/users',  async (req, res) => {
-        const user = await pool.query('SELECT * FROM users');                
+        const user = await pool.query('SELECT * FROM users');            
         return res.render('auth/users', {user, messages: req.flash('mensaje')});
     });
 

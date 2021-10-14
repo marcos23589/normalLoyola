@@ -25,7 +25,7 @@ app.engine(
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     extname: ".hbs",
-    helpers: require("./lib/handlebars"),
+    helpers: require("./lib/handlebars")
   })
 );
 app.set("view engine", ".hbs");
@@ -44,7 +44,6 @@ app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use('/', router());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -54,12 +53,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
   res.locals.messages = req.flash('mensaje')
-  res.locals.user = req.user;
+  app.locals.user = req.user;
   next();
 })
 
 //RUTAS
 app.use(require('./routes/autenticacion'));
+app.use(require('./routes/index'));
 
 //SERVIDOR
 app.listen(port,()=>{
