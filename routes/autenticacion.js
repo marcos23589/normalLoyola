@@ -3,6 +3,7 @@ const router = express.Router();
 const pool=require('../database');
 const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
+const alert = require('alert');
 
 //---AUTENTICACION DE USUARIOS---//
 
@@ -39,6 +40,7 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
     router.get('/logout', (req,res)=>{
         req.logOut();
         req.flash('mensaje', 'Sesión finalizada')
+        alert('Sesión finalizada!');
         res.redirect('/login')        
     })
 
@@ -49,8 +51,7 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
     router.get('/deleteUser/:idUsers', async (req,res)=>{
         console.log(req.params.idUsers);
-        await pool.query('DELETE FROM users WHERE idUsers = ?', req.params.idUsers);
-        // Flavio: Agregado await antes de la asignación del par:valor
+        await pool.query('DELETE FROM users WHERE idUsers = ?', req.params.idUsers);        
         req.flash('mensaje', 'Usuario eliminado exitosamente');        
         res.redirect('/users');
     });

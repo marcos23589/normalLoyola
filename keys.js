@@ -7,5 +7,4 @@ module.exports = {
         password: 'admin',
         database: 'db_alumnos'
     }
-
 };

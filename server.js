@@ -37,9 +37,7 @@ app.use(session({
   saveUninitialized: false,
   store: new MySQLStore(database)
 }))
-// Modificada por Flavio
-//app.use(flash({ sessionKeyName: 'flashMessage' }))
-//app.use(flash({ sessionKeyName: 'flashMessage', useCookieSession: true }));
+
 app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
@@ -52,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
-  res.locals.messages = req.flash('mensaje')
+  app.locals.messages = req.flash('mensaje');
   app.locals.user = req.user;
   next();
 })
@@ -60,6 +58,7 @@ app.use((req,res,next)=>{
 //RUTAS
 app.use(require('./routes/autenticacion'));
 app.use(require('./routes/index'));
+//app.use(require('./routes/links'));
 
 //SERVIDOR
 app.listen(port,()=>{

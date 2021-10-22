@@ -4,17 +4,14 @@ const pool=require('../database');
 const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
-
-
-
     router.get('/', (req, res) => {
         res.render('home')
     });
 
     router.get('/links',isLoggedIn, async (req,res)=>{
         const alumno = await pool.query('SELECT * FROM alumnos');        
-        console.log(alumno);
-        return res.render('links/list', {alumno, messages: req.flash('mensaje')});
+        console.log(alumno);        
+        return res.render('links/list', {alumno, messages:req.flash('mensaje')});
     });
     
     router.get('/add',isLoggedIn, async (req,res)=>{
@@ -23,14 +20,11 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
     
     router.post('/add', isLoggedIn, async(req,res)=>{
         try {
-            await pool.query('INSERT INTO alumnos set ?', req.body);             
-            // Flavio: Agregado await antes de la asignación del par:valor
-            req.flash('mensaje', 'Alumno guardado exitosamente');
-                       
+            await pool.query('INSERT INTO alumnos set ?', req.body);                         
+            req.flash('mensaje', 'Alumno guardado exitosamente');                       
             res.redirect('/links');               
         } catch (error) {
-            if(error.code === 'ER_DUP_ENTRY'){                
-                //alert('Documento duplicado!')                
+            if(error.code === 'ER_DUP_ENTRY'){                                           
                 req.flash('mensaje', 'Documento duplicado!');
                 res.redirect('/add')
             }
@@ -41,7 +35,6 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
     router.get('/delete/:idAlumnos', isLoggedIn, async (req,res)=>{
         console.log(req.params.idAlumnos);
         await pool.query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
-        // Flavio: Agregado await antes de la asignación del par:valor
         req.flash('mensaje', 'Alumno eliminado exitosamente');        
         res.redirect('/links');
     });
