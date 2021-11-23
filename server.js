@@ -3,8 +3,6 @@ const router = require('./routes');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
-// Agregada por Flavio
-//const { flash } = require('express-flash-message');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
@@ -50,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //VARIABLES GLOBALES
 app.use((req,res,next)=>{
-  app.locals.messages = req.flash('mensaje');
+  app.locals.message = req.flash('mensaje');
   app.locals.user = req.user;
   next();
 })
@@ -58,7 +56,7 @@ app.use((req,res,next)=>{
 //RUTAS
 app.use(require('./routes/autenticacion'));
 app.use(require('./routes/index'));
-//app.use(require('./routes/links'));
+app.use(require('./routes/alumnos'));
 
 //SERVIDOR
 app.listen(port,()=>{
