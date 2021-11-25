@@ -1,2 +1,1 @@
-En la carpeta "datos_bd" se encuentran las querys para armar la base de datos acorde a la aplicación.
-
+En la carpeta "database" se encuentran las querys para armar la base de datos acorde a la aplicación.
