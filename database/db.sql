@@ -1,3 +1,5 @@
+CREATE DATABASE db_alumnos;
+USE db_alumnos;
 DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE `alumnos` (
   `idAlumnos` int NOT NULL AUTO_INCREMENT,
