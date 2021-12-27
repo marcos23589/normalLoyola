@@ -1,6 +1,6 @@
 CREATE DATABASE db_alumnos;
 USE db_alumnos;
-DROP TABLE IF EXISTS `alumnos`;
+
 CREATE TABLE `alumnos` (
   `idAlumnos` int NOT NULL AUTO_INCREMENT,
   `apellido` varchar(45) NOT NULL,
@@ -14,11 +14,11 @@ CREATE TABLE `alumnos` (
 
 CREATE TABLE `users` (
   `idUsers` int NOT NULL AUTO_INCREMENT,
-  `user` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   PRIMARY KEY (`idUsers`));
 
-DROP TABLE IF EXISTS `legajo`;
+
 CREATE TABLE `legajo` (
   `idLegajo` int NOT NULL AUTO_INCREMENT,
   `libro` varchar(2) DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `legajo` (
   CONSTRAINT `legajo_ibfk_1` FOREIGN KEY (`legajoAlumno`) REFERENCES `alumnos` (`idAlumnos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `transito`;
+
 CREATE TABLE `transito` (
   `idTransito` int NOT NULL AUTO_INCREMENT,
   `origen` varchar(45) DEFAULT NULL,

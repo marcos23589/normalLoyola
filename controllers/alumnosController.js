@@ -3,8 +3,9 @@ const router = express.Router();
 const pool=require('../database');
 
 exports.alumnosGet = async (req,res)=>{
-    const alumno = await pool.query('SELECT * FROM alumnos');        
-    console.log(alumno);        
+    const alumno = await pool.query('SELECT * FROM alumnos');   
+    console.log("----- alumnos GET -------")
+    console.log("alumnos -> ",alumno);        
     return res.render('alumnos/list', {alumno, messages:req.flash('mensaje')});
 }
 
@@ -34,8 +35,13 @@ exports.deleteAlumnos = async (req,res)=>{
 }
 
 exports.editAlumnos = async(req,res)=>{        
-    const edicion = await pool.query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
-    console.log(edicion[0])        
+    const edicion = await pool.query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);       
+    //construimos el objeto DATE y le pasamos el timestamp en nacimiento
+    const fecha = new Date(edicion[0].nacimiento);
+    //pasamos el valor de fecha al formato YYYY-MM-DD
+    const fechaNac = `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`;
+    //lo guardamos en el body
+    edicion[0].nacimiento = fechaNac;
     res.render('alumnos/edit', {link: edicion[0]});
 }
 
