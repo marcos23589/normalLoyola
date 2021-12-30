@@ -1,13 +1,24 @@
-const express = require('express');
-const router = express.Router();
 const pool=require('../database');
-const format = require('date-fns');
+const date_fns = require('date-fns');
 
-exports.alumnosGet = async (req,res)=>{
+exports.alumnosGet = async (req,res)=>{    
     const alumno = await pool.query('SELECT * FROM alumnos');   
     console.log("----- alumnos GET -------")
     console.log("alumnos -> ",alumno);        
-    return res.render('alumnos/list', {alumno, messages:req.flash('mensaje')});
+    return res.render('alumnos/list', {alumno, messages:req.flash('mensaje')});    
+}
+
+exports.buscarAlumnosPost = async (req,res) =>{    
+    console.log("alumnosPost ->", req.body);
+    const {apellido, documento, curso, anio} = req.body;
+    console.log("apellidoPost ->", apellido);
+    const alumno = await pool.query('SELECT * FROM alumnos WHERE apellido LIKE ? or documento = ?', [apellido, documento]);
+    
+    return res.render ('alumnos/search',{alumno});
+}
+
+exports.buscarAlumnosGet = (req,res) => {
+    return res.render ('alumnos/search');
 }
 
 exports.addGet = async (req,res)=>{
@@ -37,11 +48,15 @@ exports.deleteAlumnos = async (req,res)=>{
 
 exports.editAlumnos = async(req,res)=>{        
     const edicion = await pool.query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);       
-    
-    console.log("edicion[0] ->"+edicion[0].nacimiento)
-    const fechaNac = new Date();
-    console.log("fechaNac ->"+ fechaNac.getFullYear(edicion[0].nacimiento));
-    
+    const fecha = new Date (edicion[0].nacimiento);
+    const fechaNac = date_fns.format(
+        new Date(
+            fecha.getFullYear(),
+            fecha.getMonth(),
+            fecha.getDate()
+        ), 'yyyy-MM-dd'
+    );    
+    edicion[0].nacimiento = fechaNac;
     res.render('alumnos/edit', {link: edicion[0]});
 }
 
@@ -53,13 +68,14 @@ exports.postAlumnos = async(req,res)=>{
         apellido,nombre,documento,nacimiento
     }
     await pool.query('UPDATE alumnos set ? WHERE idAlumnos = ?', [newLink, req.params.idAlumnos])
-    req.flash('mensaje', 'Cambios efectuados correctamente')
+    req.flash('mensaje', 'Cambios efectuados correctamente');
     res.redirect('/alumnos');
 }
 
 exports.verAlumno = async(req,res)=>{        
     const vista = await pool.query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
     console.log(vista[0])
-    res.render('alumnos/view', {link: vista[0]});
-    
+    res.render('alumnos/view', {link: vista[0]});    
 }
+
+
