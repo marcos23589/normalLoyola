@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool=require('../database');
+const format = require('date-fns');
 
 exports.alumnosGet = async (req,res)=>{
     const alumno = await pool.query('SELECT * FROM alumnos');   
@@ -36,12 +37,11 @@ exports.deleteAlumnos = async (req,res)=>{
 
 exports.editAlumnos = async(req,res)=>{        
     const edicion = await pool.query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);       
-    //construimos el objeto DATE y le pasamos el timestamp en nacimiento
-    const fecha = new Date(edicion[0].nacimiento);
-    //pasamos el valor de fecha al formato YYYY-MM-DD
-    const fechaNac = `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`;
-    //lo guardamos en el body
-    edicion[0].nacimiento = fechaNac;
+    
+    console.log("edicion[0] ->"+edicion[0].nacimiento)
+    const fechaNac = new Date();
+    console.log("fechaNac ->"+ fechaNac.getFullYear(edicion[0].nacimiento));
+    
     res.render('alumnos/edit', {link: edicion[0]});
 }
 

@@ -38,7 +38,7 @@ CREATE TABLE `transito` (
   `idTransito` int NOT NULL AUTO_INCREMENT,
   `origen` varchar(45) DEFAULT NULL,
   `fechaIngreso` date DEFAULT NULL,
-  `salida` varchar(15) DEFAULT NULL,
+  `salida` varchar(45) DEFAULT NULL,
   `fechaSalida` date DEFAULT NULL,
   `observaciones` varchar(45) DEFAULT NULL,
   `fechaEgreso` date DEFAULT NULL,
