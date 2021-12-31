@@ -60,45 +60,47 @@
   </div>
 </div>
 
-{{#if alumno}}
-    <div class="container p-4">
+<div>
+  {{#if alumno}}
+  <div class="container p-4">
     <table class="table table-hover table-sm caption-top align-middle">
-        <div class="caption">
-            <h3>Lista de alumnos</h3>
-        </div>
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Documento</th>
-                <th scope="col">Fecha de nacimiento</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each alumno}}
-            <tr>
-                <th scope="row">{{idAlumnos}}</th>
-                <td>{{apellido}}</td>
-                <td>{{nombre}}</td>
-                <td>{{documento}}</td>
-                <td>{{timeago nacimiento}}</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/view/{{idAlumnos}}" class="btn btn-primary">Ver</a>
-                    {{!-- <a href="/edit/{{idAlumnos}}" class="btn btn-secondary">Editar</a>
-                    <a href="/delete/{{idAlumnos}}" class="btn btn-danger">Eliminar</a> --}}
-                </div>
-                </td>
-            </tr>            
-            {{/each}}
-        </tbody>
-    </table>    
-    {{else}}
-            <div class="col-md-4 mx-auto">
-                <div class="card card-body text-center">
-                    <h4>No se encontraron alumnos.</h4>                   
-                </div>
+      <div class="caption">
+        <h3>Lista de alumnos</h3>
+      </div>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Documento</th>
+          <th scope="col">Fecha de nacimiento</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each alumno}}
+        <tr>
+          <th scope="row">{{idAlumnos}}</th>
+          <td>{{apellido}}</td>
+          <td>{{nombre}}</td>
+          <td>{{documento}}</td>
+          <td>{{timeago nacimiento}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <a href="/view/{{idAlumnos}}" class="btn btn-primary">Ver</a>
+              {{!-- <a href="/edit/{{idAlumnos}}" class="btn btn-secondary">Editar</a>
+              <a href="/delete/{{idAlumnos}}" class="btn btn-danger">Eliminar</a> --}}
             </div>
+          </td>
+        </tr>
+  </div>
+  {{else}}
+    <div class="col-md-4 mx-auto">
+      <div class="card card-body text-center">
+        <h4>No se encontraron alumnos.</h4>
+      </div>
     </div>
-{{/if}}
+  {{/each}}
+  </tbody>
+  </table>
+  {{/if}}
+</div>

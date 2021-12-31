@@ -11,14 +11,20 @@ exports.alumnosGet = async (req,res)=>{
 exports.buscarAlumnosPost = async (req,res) =>{    
     console.log("alumnosPost ->", req.body);
     const {apellido, documento, curso, anio} = req.body;
-    console.log("apellidoPost ->", apellido);
-    const alumno = await pool.query('SELECT * FROM alumnos WHERE apellido LIKE ? or documento = ?', [apellido, documento]);
+    let alumno = await pool.query('SELECT * FROM alumnos WHERE apellido LIKE ? or documento = ? ORDER BY nombre', [apellido, documento]);
     
+    try {
+        console.log(alumno[0].idAlumnos)
+    } catch (error) {
+        console.error(error);
+        req.flash('mensaje', 'No se encontraron alumnos');
+    }
+
     return res.render ('alumnos/search',{alumno});
 }
 
 exports.buscarAlumnosGet = (req,res) => {
-    return res.render ('alumnos/search');
+    return res.render ('alumnos/search', {messages:req.flash('mensaje')});
 }
 
 exports.addGet = async (req,res)=>{
@@ -42,7 +48,7 @@ exports.addPost = async(req,res)=>{
 exports.deleteAlumnos = async (req,res)=>{
     console.log(req.params.idAlumnos);
     await pool.query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
-    req.flash('mensaje', 'Alumno eliminado exitosamente');        
+    req.flash('mensaje', 'Alumno eliminado exitosamente');
     res.redirect('/alumnos');
 }
 
