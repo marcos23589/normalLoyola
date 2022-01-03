@@ -11,5 +11,7 @@ router.get('/delete/:idAlumnos', isLoggedIn, alumnosController.deleteAlumnos);
 router.get('/edit/:idAlumnos', isLoggedIn, alumnosController.editAlumnos);
 router.post('/edit/:idAlumnos', isLoggedIn, alumnosController.postAlumnos);
 router.get('/view/:idAlumnos', isLoggedIn, alumnosController.verAlumno);
+router.get('/extra/:idAlumnos', isLoggedIn, alumnosController.extrasGet);
+router.post('/extra/:idAlumnos', isLoggedIn, alumnosController.extrasPost);
 router.get('/search', isLoggedIn, alumnosController.buscarAlumnosGet);
 module.exports=router;

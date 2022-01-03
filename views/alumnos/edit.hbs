@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <form class="row g-3" action="/edit/{{link.idAlumnos}}" method="POST">
-                        <h3>Edición de alumnos</h3>
+                        <h3>Edición de alumno</h3>
                         <div class="col-md-12">
                                 <label class="form-label">Nombre</label>
                                 <input value="{{link.nombre}}" type="text" class="form-control" name="nombre" id="nombre" placeholder="Juan" autofocus required="required">
@@ -22,6 +22,9 @@
                             <div class="col-6">
                                 <label class="form-label">Fecha de nacimiento</label>
                                 <input value="{{link.nacimiento}}" type="date" class="form-control" name="nacimiento" id="nacimiento" required="required">
+                            </div>
+                            <div class="form-group d-grid gap-2">
+                                <a href="/extra/{{link.idAlumnos}}" class="btn btn-secondary">Agregar más información</a>
                             </div>
                             <div class="form-group d-grid gap-2">
                                 <button class="btn btn-primary ">Guardar cambios</button>

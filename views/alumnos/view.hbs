@@ -1,17 +1,18 @@
 <div class="div container p-4 mx-auto">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{link.apellido}}, {{link.nombre}}</h5>
-                    <p class="card-text">D.N.I. N° {{link.documento}}</p>
-                    <p class="card-text">Fecha de nacimiento: {{timeago link.nacimiento}}</p>                    
+                    <h2 class="card-title">{{link.apellido}}, {{link.nombre}}</h2>
+                    <h5 class="card-text">D.N.I. N° {{link.documento}}</h5>
+                    <h5 class="card-text">Fecha de nacimiento: {{timeago link.nacimiento}}</h5>                    
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a href="/search" class="btn btn-primary">Volver</a>
+                        <a href="/search" class="btn btn-primary">Volver</a>                        
                         <a href="/edit/{{link.idAlumnos}}" class="btn btn-secondary">Editar</a>
                         <a href="/delete/{{link.idAlumnos}}" class="btn btn-danger">Eliminar</a>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
