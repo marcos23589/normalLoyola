@@ -25,6 +25,7 @@ CREATE TABLE `legajo` (
   `folio` varchar(2) DEFAULT NULL,
   `legajo` int DEFAULT NULL,
   `ano` int DEFAULT NULL,
+  `curso` varchar(2) DEFAULT NULL,
   `legajoAlumno` int DEFAULT NULL,
   PRIMARY KEY (`idLegajo`),
   UNIQUE KEY `idLegajo_UNIQUE` (`idLegajo`),

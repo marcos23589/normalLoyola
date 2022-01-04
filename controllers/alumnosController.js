@@ -84,16 +84,4 @@ exports.verAlumno = async(req,res)=>{
     res.render('alumnos/view', {link: vista[0]});    
 }
 
-exports.extrasGet = (req,res)=>{
-    
-    res.render('alumnos/extra')
-}
-
-exports.extrasPost = (req,res)=>{
-    const extra = req.body;
-    console.log("EXTRA ->", extra);
-    res.redirect('alumnos');
-    
-}
-
 

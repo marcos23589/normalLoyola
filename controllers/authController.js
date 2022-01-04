@@ -17,7 +17,7 @@ exports.logueoGet = (req, res) =>{
 
 exports.logueoPost = (req, res, next) => {
   passport.authenticate ('local.login', {
-    successRedirect: '/profile',
+    successRedirect: '/alumnos',
     failureRedirect: '/login',
     failureFlash: true
   }) (req,res,next);
