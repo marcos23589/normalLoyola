@@ -10,7 +10,7 @@ exports.alumnosGet = async (req, res) => {
 
 exports.buscarAlumnosPost = async (req, res) => {
   console.log("alumnosPost ->", req.body);
-  const { apellido, documento, curso, anio } = req.body;
+  const { apellido, documento } = req.body;
   let alumno = await pool.query(
     "SELECT * FROM alumnos WHERE apellido LIKE ? or documento = ? ORDER BY nombre",
     [apellido, documento]
