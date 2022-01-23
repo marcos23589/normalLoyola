@@ -6,7 +6,7 @@ exports.registerGet = (req, res) => {
 };
 
 exports.registerPost = passport.authenticate("local.register", {
-  successRedirect: "/login",
+  successRedirect: "/alumnos",
   failureRedirect: "/register",
   failureFlash: true,
 });
