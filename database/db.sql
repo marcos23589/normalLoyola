@@ -12,8 +12,8 @@ CREATE TABLE `alumnos` (
 
 CREATE TABLE `users` (
   `idUsers` int NOT NULL AUTO_INCREMENT,
-  `user` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   PRIMARY KEY (`idUsers`));
 
 DROP TABLE IF EXISTS `legajo`;
