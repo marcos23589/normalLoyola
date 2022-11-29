@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const { isLoggedIn } = require('../lib/auth');
-const alumnosController = require('../controllers/alumnosController')
+import { Router } from 'express';
+const router = Router();
+import { isLoggedIn } from '../lib/auth';
+import { alumnosGet, addGet, addPost, deleteAlumnos, editAlumnos, postAlumnos, verAlumno } from '../controllers/alumnosController';
 
-router.get('/alumnos',isLoggedIn, alumnosController.alumnosGet);
-router.get('/add',isLoggedIn, alumnosController.addGet);
-router.post('/add', isLoggedIn, alumnosController.addPost);
-router.get('/delete/:idAlumnos', isLoggedIn, alumnosController.deleteAlumnos);
-router.get('/edit/:idAlumnos', isLoggedIn, alumnosController.editAlumnos);
-router.post('/edit/:idAlumnos', isLoggedIn, alumnosController.postAlumnos);
-router.get('/view/:idAlumnos', isLoggedIn, alumnosController.verAlumno);
+router.get('/alumnos',isLoggedIn, alumnosGet);
+router.get('/add',isLoggedIn, addGet);
+router.post('/add', isLoggedIn, addPost);
+router.get('/delete/:idAlumnos', isLoggedIn, deleteAlumnos);
+router.get('/edit/:idAlumnos', isLoggedIn, editAlumnos);
+router.post('/edit/:idAlumnos', isLoggedIn, postAlumnos);
+router.get('/view/:idAlumnos', isLoggedIn, verAlumno);
 
-module.exports=router;
+export default router;

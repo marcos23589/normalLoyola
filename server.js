@@ -56,7 +56,7 @@ app.use((req,res,next)=>{
 //RUTAS
 app.use(require('./routes/autenticacion'));
 app.use(require('./routes/index'));
-app.use(require('./routes/alumnos'));
+app.use(require('./routes/alumnos').default);
 
 //SERVIDOR
 app.listen(port,()=>{
