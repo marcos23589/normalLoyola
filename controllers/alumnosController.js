@@ -1,18 +1,19 @@
-import { Router } from 'express';
+const Router = require('express');
 const router = Router();
-import { query } from '../database';
+const { query } = ('../database')
 
-export async function alumnosGet(req,res){
+
+exports.alumnosGet = async(req,res) => {
     const alumno = await query('SELECT * FROM alumnos');        
     console.log(alumno);        
     return res.render('alumnos/list', {alumno, messages:req.flash('mensaje')});
 }
 
-export async function addGet(req,res){
+exports.addGet = (req,res) => {
     return res.render('alumnos/add', {messages: req.flash('mensaje')});
 }
 
-export async function addPost(req,res){
+exports.addPost =  async (req,res) => {
     try {
         await query('INSERT INTO alumnos set ?', req.body);                         
         req.flash('mensaje', 'Alumno guardado exitosamente');                       
@@ -26,21 +27,20 @@ export async function addPost(req,res){
     console.log('REQ->',req.body)
 }
 
-export async function deleteAlumnos(req,res){
+exports.deleteAlumnos = async (req,res) => {
     console.log(req.params.idAlumnos);
     await query('DELETE FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
     req.flash('mensaje', 'Alumno eliminado exitosamente');        
     res.redirect('/alumnos');
 }
 
-export async function editAlumnos(req,res){        
+exports.editAlumnos = async (req,res) => {        
     const edicion = await query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
     console.log(edicion[0])        
     res.render('alumnos/edit', {link: edicion[0]});
 }
 
-export async function postAlumnos(req,res){
-    
+exports.postAlumnos = async (req,res) => {    
     console.log('params',req.body.nacimiento)
     const { apellido,nombre,documento,nacimiento} = req.body;
     const newLink = {
@@ -51,9 +51,8 @@ export async function postAlumnos(req,res){
     res.redirect('/alumnos');
 }
 
-export async function verAlumno(req,res){        
+exports.verAlumno = async (req,res) => {        
     const vista = await query('SELECT * FROM alumnos WHERE idAlumnos = ?', req.params.idAlumnos);
     console.log(vista[0])
-    res.render('alumnos/view', {link: vista[0]});
-    
+    res.render('alumnos/view', {link: vista[0]});    
 }
