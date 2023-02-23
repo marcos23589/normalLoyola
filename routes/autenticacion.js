@@ -13,7 +13,3 @@ router.get('/users',  authController.usersGet);
 router.get('/deleteUser/:idUsers', authController.deleteUserGet);
 
 module.exports = router;
-
-    
-
-

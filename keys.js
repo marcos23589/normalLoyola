@@ -1,3 +1,4 @@
+// ESTABLECEMOS LOS DATOS DE CONEXION A LA BBDD
 module.exports = {
 
     database: {
